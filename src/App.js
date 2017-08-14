@@ -8,24 +8,23 @@ function SelectTheme (props) {
 
   return (
     <div>
-      <div className='box25'>
+      <div className='App-header'>
         <div className="dropdown">
           <button className="dropbtn">Pick a Theme:</button>
-          <div className="dropdown-content">
-            <a href="#1" onClick={props.selectTheme.bind(null, 'theGoonies')}>The Goonies</a>
-            <a href="#1" onClick={props.selectTheme.bind(null, 'bigHeroSix')}>Big Hero Six</a>
-            <a href="#1" onClick={props.selectTheme.bind(null, 'aChristmasStory')}>A Christmas Story</a>
-          </div>
+          <ul className="dropdown-content">
+            <li href="#1" onClick={props.selectTheme.bind(null, 'theGoonies')}>The Goonies</li>
+            <li href="#1" onClick={props.selectTheme.bind(null, 'bigHeroSix')}>Big Hero Six</li>
+            <li href="#1" onClick={props.selectTheme.bind(null, 'aChristmasStory')}>A Christmas Story</li>
+          </ul>
         </div>
       </div>
-      <p> {props.selectedTheme}</p>
-      <div className='box25'>
-        <div className="dropdown">
-          <button className="dropbtn">Pick a Letter:</button>
-          <ul className="dropdown-content">
+
+      <div className='box26'>
+        <div>
+          <ul className='select'>
             {letters.map(function(letter){
               return (
-                <li onClick={props.checkWord.bind(null, letter)} key={letter}> {letter} </li>
+                <li className='each'onClick={props.checkWord.bind(null, letter)} key={letter}> {letter} </li>
               )
             }.bind(this))}
           </ul>
@@ -42,14 +41,25 @@ class Main extends Component {
       selectedTheme : '',
       selectedWord: '',
       guessedWord: [],
-      winner: 'no'
+      winner: 'maybe',
+      wrongLetters: [],
+      count: 0
     }
     this.selectTheme = this.selectTheme.bind(this);
     this.checkWord = this.checkWord.bind(this);
   }
   selectTheme (theme) {
     var word = themes[theme][Math.floor(Math.random() * 5)];
-
+    this.setState(function(){
+      return {
+        selectedTheme : '',
+      selectedWord: '',
+      guessedWord: [],
+      winner: 'maybe',
+      wrongLetters: [],
+      count: 0
+      }
+    })
     this.setState(function(){
       return {
         selectedTheme: theme,
@@ -74,31 +84,130 @@ class Main extends Component {
             for(var i = 0; i < name.length; i++){
               if(name[i] === letter){
                 result[i] = letter;
+              } else if (name.indexOf(letter) === -1){
+                this.setState(function(){
+                  return {
+                    wrongLetters: this.state.wrongLetters.concat([letter]),
+                    count: this.state.count + 1
+                  }
+                })
               }
             }
           }
         }
         }
-        if(result.indexOf('_') === -1){
-          result = result.join('')
+        if(this.state.wrongLetters.length > 5){
+          this.setState(function(){
+            return {
+              winner : 'NO'
+            }
+          })
         }
-        this.setState(function(){
+        if(result.indexOf('_') === -1){
+          this.checkWinner()
+        }
+
+          this.setState(function(){
           return {
-            guessedWord: result
+            guessedWord: result,
+
           }
         })
-        this.checkWinner()
+
+
+
  }
  checkWinner() {
-  if(this.state.selectedWord === this.state.guessedWord){
+
     this.setState(function(){
       return {
         winner: 'YES'
       }
     })
-  }
+
  }
   render() {
+    var count = 'pic' + this.state.count
+    var man;
+
+      man = (
+        <div className='man'>
+        <div className= {count}> </div>
+        </div>
+      )
+
+
+    var answer;
+    if(this.state.winner === 'maybe'){
+      answer = (
+        <p className='words'> {this.state.guessedWord.map(function(letter){
+              return letter
+            })}
+        </p>
+      )
+    } else if (this.state.winner === 'NO'){
+      answer = (
+        <p className='winner'> Loser! It was {this.state.selectedWord}</p>
+      )
+    } else if (this.state.winner === 'YES'){
+      answer = (
+        <p className='winner'> Winner!</p>
+      )
+    }
+    var certaintheme;
+    if(this.state.selectedTheme === 'theGoonies'){
+      certaintheme = (
+        <div>
+           <div className = 'box25'>
+          {answer}
+        </div>
+        <div className='g'>
+        </div>
+        <div className ='hangmanp'>
+            {man}
+            {this.state.wrongLetters.map(function(letter){
+              return  letter
+            })}
+
+        </div>
+        </div>
+      )
+    }
+     else if(this.state.selectedTheme === 'bigHeroSix'){
+      certaintheme = (
+        <div>
+           <div className = 'box25'>
+          {answer}
+        </div>
+        <div className='b'>
+        </div>
+        <div className ='hangmanp'>
+            {man}
+            {this.state.wrongLetters.map(function(letter){
+              return  letter
+            })}
+
+        </div>
+        </div>
+      )
+    }
+     else if(this.state.selectedTheme === 'aChristmasStory'){
+      certaintheme = (
+        <div>
+           <div className = 'box25'>
+          {answer}
+        </div>
+         <div className='bu'>
+        </div>
+        <div className ='hangmanp'>
+            {man}
+            {this.state.wrongLetters.map(function(letter){
+              return  letter
+            })}
+        </div>
+        </div>
+      )
+    }
     return (
       <div>
         <SelectTheme
@@ -106,9 +215,7 @@ class Main extends Component {
           selectedTheme={this.state.selectedTheme}
           checkWord={this.checkWord}
         />
-        <p> {this.state.guessedWord.map(function(letter){
-          return letter
-        })}</p>
+        {certaintheme}
       </div>
     )
   }
@@ -118,10 +225,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-
-
-        </div>
         <div className="App-intro">
           <Main />
         </div>

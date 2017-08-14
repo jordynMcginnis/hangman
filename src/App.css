@@ -5,9 +5,10 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 100px;
+  padding: 5px;
   color: white;
+
 }
 
 .App-intro {
@@ -15,15 +16,133 @@
 }
 
 .box25 {
-  width: 27%;
-  height: 16.6%;
+  width: 30%;
+  height: 50%;
   float: left;
 }
 
+  .g {
+  position: fixed;
+  height: 150px;
+  bottom: 0;
+  width: 100%;
+  background-image: url('./photo/goon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+  .b {
+  position: fixed;
+  height: 150px;
+  bottom: 0;
+  width: 100%;
+  background-image: url('./photo/bl.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+.bu {
+  position: fixed;
+  height: 150px;
+  bottom: 0;
+  width: 100%;
+  background-image: url('./photo/bu.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+.pic1 {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-image: url('./photo/pic1.png');
+}
+.pic2{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-image: url('./photo/pic2.png');
+}
+.pic3{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-image: url('./photo/pic3.png');
+}
+.pic4{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-image: url('./photo/pic4.png');
+}
+.pic5{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-image: url('./photo/pic5.png');
+}
+.pic6{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-image: url('./photo/pic6.png');
+}
+.pic7{
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-image: url('./photo/pic7.png');
+}
+.man {
+  height: 250px;
+  width: 300px;
+  border-style: solid;
+  border-width: 3px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+.hangmanp {
+  width: 45%;
+  float: right;
+  letter-spacing: 5px;
+  font-size: 35px;
+  height: 50%;
+  text-align: bottom;
+  margin-top: 5%;
+}
+.select {
+  width: 95%;
+  list-style: none;
+  background-color: black;
+  margin: 0 auto;
+
+}
+.select li:hover {background-color: #d8d8d8}
+.each{
+  width: 4%;
+  height: 25%;
+  float: left;
+  padding: 10px;
+  margin: 5px;
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: grey;
+}
+.winner{
+  font-size: 40px;
+}
 .dropbtn {
     color: white;
     width: 310px;
-    height: 80px;
+    height: 70px;
     border: none;
     cursor: pointer;
 
@@ -36,6 +155,7 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    float: center;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -74,6 +194,13 @@
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
     background-color: grey;
+}
+
+.words{
+  font-size: 70px;
+  letter-spacing: 5px;
+  width: 150%;
+  text-align: center;
 }
 
 
